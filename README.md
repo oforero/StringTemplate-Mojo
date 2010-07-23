@@ -148,3 +148,81 @@ And possible add the goal add-source to your compiler plugin
            </args>
          </configuration>
        </plugin>
+
+## Sample Templates
+
+You can use any valid StringTemplate with this mojo, for example from the following templates:
+
+### Header template
+    package uk.ac.liv.oforero.currency
+
+    import uk.ac.liv.oforero.coretypes.{GenericValueCompanion}
+
+### Body template
+
+    /**
+     * Generated code for Currency: $Name$
+     */
+
+    class $Iso$(value: BigDecimal) extends Currency[$Iso$](value, $Name$Info)
+
+    object $Iso$ extends CurrencyCompanion[$Iso$]{
+      protected def newBuilder(myVal: BigDecimal) = new $Iso$(myVal)
+
+      class PimpWith$Name$(value: BigDecimal) {
+        def $Iso$ = new $Iso$(value)
+      }
+
+      implicit def numeric2$Iso$[V <% BigDecimal](value: V) = new PimpWith$Name$(value)
+    }
+
+The following code is generated when passing the appropriate parameters:
+
+    package uk.ac.liv.oforero.currency
+
+    import uk.ac.liv.oforero.coretypes.{GenericValueCompanion}
+    /**
+     * Generated code for Currency: Pound
+     */
+
+    class GBP(value: BigDecimal) extends Currency[GBP](value, PoundInfo)
+
+    object GBP extends CurrencyCompanion[GBP]{
+      protected def newBuilder(myVal: BigDecimal) = new GBP(myVal)
+
+      class PimpWithPound(value: BigDecimal) {
+        def GBP = new GBP(value)
+      }
+
+      implicit def numeric2GBP[V <% BigDecimal](value: V) = new PimpWithPound(value)
+    }
+    /**
+     * Generated code for Currency: Dollar
+     */
+
+    class USD(value: BigDecimal) extends Currency[USD](value, DollarInfo)
+
+    object USD extends CurrencyCompanion[USD]{
+      protected def newBuilder(myVal: BigDecimal) = new USD(myVal)
+
+      class PimpWithDollar(value: BigDecimal) {
+        def USD = new USD(value)
+      }
+
+      implicit def numeric2USD[V <% BigDecimal](value: V) = new PimpWithDollar(value)
+    }
+    /**
+     * Generated code for Currency: Euro
+     */
+
+    class EUR(value: BigDecimal) extends Currency[EUR](value, EuroInfo)
+
+    object EUR extends CurrencyCompanion[EUR]{
+      protected def newBuilder(myVal: BigDecimal) = new EUR(myVal)
+
+      class PimpWithEuro(value: BigDecimal) {
+        def EUR = new EUR(value)
+      }
+
+      implicit def numeric2EUR[V <% BigDecimal](value: V) = new PimpWithEuro(value)
+    }
