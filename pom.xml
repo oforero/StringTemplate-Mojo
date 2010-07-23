@@ -112,7 +112,6 @@
               </execution>
           </executions>
           <configuration>
-            <vscaladocVersion>1.1</vscaladocVersion>
             <scalaVersion>${scala.version}</scalaVersion>
             <args>
               <arg>-target:jvm-1.5</arg>

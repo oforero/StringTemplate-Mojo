@@ -20,18 +20,15 @@ import java.io.{Writer, File}
 import org.scala_tools.maven.mojo.annotations._
 
 /**
- * TODO: Write description here!!
+ * Maven compliant Mojo Implementation
  *
  * @author Oscar Forero
  * @version 1.0
  *
- * Date: Apr 11, 2010
- * Time: 2:03:49 PM
- *
  */
 
 /**
- * Goal which touches a timestamp file.
+ * The Mojo execute on Maven's goals: __generate__ and __generate-sources__
  */
 @goal("generate")
 @phase("generate-sources")
@@ -173,6 +170,9 @@ class StringTemplateMojo extends AbstractMojo {
     }
   }
 
+  /**
+   * This is meant to be called by Maven
+   */
   @throws(classOf[MojoExecutionException])
   def execute() {
     require(templates.length > 0, "At least one template is required")
