@@ -1,0 +1,203 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>scalajutsu.mojos</groupId>
+  <artifactId>stringtemplate</artifactId>
+  <packaging>maven-plugin</packaging>
+  <version>0.5-SNAPSHOT</version>
+  <name>Scalajutsu's StringTemplate Maven Mojo</name>
+  <inceptionYear>2010</inceptionYear>
+  <description>An Maven Mojo to generate Source Code using StringTemplate, written in Scala</description>
+
+
+  <properties>
+    <scala.version>2.8.0</scala.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>releases.scala-tools.org</id>
+      <name>Scala-Tools Maven2 Repository</name>
+      <url>http://scala-tools.org/repo-releases</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>snapshot.scala-tools.org</id>
+      <name>Scala-Tools Maven2 Repository (SNAPSHOT)</name>
+      <url>http://scala-tools.org/repo-snapshots</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>org.codehaus.mojo</id>
+      <name>Codehaus PlugIn Repository</name>
+      <url>http://repository.codehaus.org/org/codehaus/mojo</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <repositories>
+    <repository>
+      <id>releases.scala-tools.org</id>
+      <name>Scala-Tools Maven2 Repository</name>
+      <url>http://scala-tools.org/repo-releases</url>
+    </repository>
+    <repository>
+      <id>snapshot.scala-tools.org</id>
+      <name>Scala-Tools Maven2 Repository (SNAPSHOT)</name>
+      <url>http://scala-tools.org/repo-snapshots</url>
+    </repository>
+    <repository>
+        <id>clapper.org</id>
+        <name>Clapper (Scalasti) repository</name>
+        <url>http://maven.clapper.org</url>
+    </repository>
+  </repositories>
+
+   <build>
+     <pluginManagement>
+       <plugins>
+         <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-clean-plugin</artifactId>
+           <version>2.4.1</version>
+         </plugin>
+         <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-install-plugin</artifactId>
+           <version>2.3.1</version>
+         </plugin>
+         <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-jar-plugin</artifactId>
+           <version>2.3.1</version>
+         </plugin>
+         <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-site-plugin</artifactId>
+           <version>2.1.1</version>
+         </plugin>
+         <plugin>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-plugin-plugin</artifactId>
+           <version>2.6</version>
+         </plugin>
+         <plugin>
+           <groupId>org.codehaus.mojo</groupId>
+           <artifactId>versions-maven-plugin</artifactId>
+           <version>1.2</version>
+         </plugin>
+         <plugin>
+           <groupId>org.scala-tools</groupId>
+           <artifactId>maven-scala-plugin</artifactId>
+           <version>2.14</version>
+         </plugin>
+       </plugins>
+     </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <configuration>
+        </configuration>
+      </plugin>
+      <plugin>
+          <groupId>org.scala-tools</groupId>
+          <artifactId>maven-scala-plugin</artifactId>
+          <executions>
+              <execution>
+                  <goals>
+                      <goal>add-source</goal>
+                      <goal>compile</goal>
+                  </goals>
+              </execution>
+          </executions>
+          <configuration>
+            <vscaladocVersion>1.1</vscaladocVersion>
+            <scalaVersion>${scala.version}</scalaVersion>
+            <args>
+              <arg>-target:jvm-1.5</arg>
+              <arg>-unchecked</arg>
+              <!--<arg>-Xprint:typer</arg>-->
+              <!--<arg>-explaintypes</arg>-->
+              <arg>-deprecation</arg>
+              <!--<arg>-Xexperimental</arg>-->
+            </args>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-plugin-plugin</artifactId>
+        <version>2.4.3</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.scala-tools</groupId>
+            <artifactId>scala-mojo-support</artifactId>
+            <version>0.3-SNAPSHOT</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+  
+  <dependencies>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>${scala.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-api</artifactId>
+      <version>2.2.1</version>
+    </dependency>
+    <dependency>
+        <groupId>org.scala-tools</groupId>
+        <artifactId>scala-mojo-support</artifactId>
+        <version>0.3-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>net.lag</groupId>
+      <artifactId>configgy</artifactId>
+      <version>1.6</version>
+    </dependency>
+    <dependency>
+      <groupId>org.clapper</groupId>
+      <artifactId>scalasti_${scala.version}</artifactId>
+      <version>0.4.1</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.scalatest</groupId>
+      <artifactId>scalatest</artifactId>
+      <version>1.2</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <developers>
+    <developer>
+      <id>oforero</id>
+      <name>Oscar Forero</name>
+      <email>Use GitHub</email>
+      <organization>Scalajutsu</organization>
+      <timezone>+1</timezone>
+      <roles>
+        <role>Owner</role>
+        <role>Committer</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <scm>
+    <url>http://github.com/oforero/StringTemplate-Mojo</url>
+    <connection>scm:git:git://github.com/oforero/StringTemplate-Mojo.git</connection>
+    <developerConnection>scm:git:git@github.com:oforero/StringTemplate-Mojo.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
+
+</project>
