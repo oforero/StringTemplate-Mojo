@@ -125,3 +125,26 @@ If having the generated files available for compilation is required then add the
           </execution>
         </executions>
       </plugin>
+
+And possible add the goal add-source to your compiler plugin
+
+       <plugin>
+         <groupId>org.scala-tools</groupId>
+         <artifactId>maven-scala-plugin</artifactId>
+         <executions>
+           <execution>
+             <goals>
+               <goal>add-source</goal>
+               <goal>compile</goal>
+               <goal>testCompile</goal>
+             </goals>
+           </execution>
+         </executions>
+         <configuration>
+           <scalaVersion>${scala.version}</scalaVersion>
+           <args>
+             <arg>-target:jvm-1.5</arg>
+             <arg>-unchecked</arg>
+           </args>
+         </configuration>
+       </plugin>
