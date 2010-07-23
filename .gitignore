@@ -1,0 +1,10 @@
+.idea
+*.iml
+*.iws
+*.ipr
+lib_managed
+project
+scala-dist
+target
+*.log
+*.ignore
