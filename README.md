@@ -7,6 +7,12 @@ or from a Database query.
 It was created to cover the need of generating Scala code but it should be possible to use it
 for other purposes.
 
+## Building and Installing
+For the moment you need to clone this project and build it locally.
+
+    mvn clean install
+
+
 ## Simple configuration
 
 A minimal configuration can pass the parameters for the StringTemplate directly, each parameter tag results in a
@@ -39,7 +45,6 @@ template application.
         </templates>
         <footers>
           <footer>CurrencyCompanion_footer</footer>
-
           <footer>CurrencyBasedFactory_footer</footer>
         </footers>
         <parameters>
