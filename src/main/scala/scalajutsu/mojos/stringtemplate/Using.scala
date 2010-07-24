@@ -25,8 +25,8 @@ import File._
  * @version 1.0
  *
  */
-
 object Using {
+
   /**
    * Opens a Final in the requested repository with the provided encoding
    * then executes the function passing a Writer to the file as parameter
